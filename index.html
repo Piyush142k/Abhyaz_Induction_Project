@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <!-- Poppins Google font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      background: white;
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #333;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    header img {
+      width: 130px; /* Adjust the size of the logo */
+      margin-right: 15px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav ul li {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .front-page {
+      text-align: center;
+      color: #343a40;
+      animation: fadeInUp 1s ease-in-out;
+      margin: auto;
+      flex: 1;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      color: #495057;
+    }
+
+    .cta-button {
+      background-color: #28a745;
+      color: #fff;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .cta-button:hover {
+      background-color: #218838;
+    }
+
+    footer {
+      background: white;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+      width: 100%;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+    }
+
+    footer img {
+      width: 30px;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="Abhyaz.logo.jpg" alt="Logo">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="form1.html">Register</a></li>
+        <li><a href="details.php">Detail Sheet</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <div class="front-page">
+    <h1>Welcome to Abhyaz Internship</h1>
+    <p>Join our team by filling out the intern registration form. We look forward to working with you!</p>
+    <a href="Form1.html" class="cta-button">Register Now</a>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; Abhyaz 2024</p>
+    <!-- Add your social media logos here -->
+      <a href="https://www.linkedin.com/company/abhyazlearning/mycompany/" ><img src="Linkedin.png" alt="LinkedIn" ></a>
+      <a href="https://www.abhyaz.com/" ><img src="google.png" alt="Google" ></a>
+      <a href="https://www.facebook.com/abhyazlearning/" ><img src="Facebook.png" alt="Facebook" ></a>
+      <a href="https://www.instagram.com/abhyazlearning/?hl=en" ><img src="Instagram.png" alt="Instagram" ></a>
+  </footer>
+
+</body>
+
+</html>

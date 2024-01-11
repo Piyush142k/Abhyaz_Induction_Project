@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Registration and Task Form</title>
+  <!-- Poppins Google font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" />
+  <!-- Add Calendar CSS link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.2/flatpickr.min.css" />
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: rgb(130, 106, 251);
+      margin: 0;
+    }
+
+    /* Progress Bar Styles */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #ddd;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: black;
+      transition: width 0.3s;
+    }
+
+    /* Header Styles */
+    header {
+      width: 100%;
+      background: white; /* White background color */
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      color: #333; /* Dark text color */
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    header img {
+      width: 130px; /* Adjust the size of the logo */
+      margin-right: 15px;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav ul li {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333; /* Dark text color */
+      cursor: pointer;
+    }
+
+    /* Container Styles */
+    .container {
+      position: relative;
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      margin-top: 60px; /* Adjusted margin to accommodate fixed header */
+      flex: 1;
+    }
+
+    .container header {
+      font-size: 1.5rem;
+      color: #333;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    .form {
+      margin-top: 20px;
+    }
+
+    /* Input Box Styles */
+    .input-box {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-box label {
+      color: #333;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .form :where(.input-box input, .select-box) {
+      position: relative;
+      height: 40px;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+      color: #333;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 8px 15px;
+      transition: border-color 0.3s;
+    }
+
+    .input-box input:focus {
+      border-color: rgb(130, 106, 251);
+    }
+
+    /* Column Styles */
+    .form .column {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    /* Gender Box Styles */
+    .form .gender-box {
+      margin-top: 20px;
+    }
+
+    .gender-box h3 {
+      color: #333;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .form :where(.gender-option, .gender) {
+      display: flex;
+      align-items: center;
+      column-gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .form .gender {
+      column-gap: 5px;
+    }
+
+    .gender input {
+      accent-color: rgb(130, 106, 251);
+    }
+
+    .gender label {
+      color: #333;
+    }
+
+    /* Address Styles */
+    .address :where(input, .select-box) {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    /* Select Box Styles */
+    .select-box select {
+      height: 40px;
+      width: 100%;
+      outline: none;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      color: #333;
+      font-size: 1rem;
+      padding: 8px 15px;
+      transition: border-color 0.3s;
+    }
+
+    .select-box select:focus {
+      border-color: rgb(130, 106, 251);
+    }
+
+    /* Button Styles */
+    .form button {
+      height: 45px;
+      width: 100%;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      background: rgb(130, 106, 251);
+      border-radius: 6px;
+    }
+
+    .form button:hover {
+      background: rgb(88, 56, 250);
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 500px) {
+      .form .column {
+        flex-wrap: wrap;
+      }
+
+      .form :where(.gender-option, .gender) {
+        row-gap: 15px;
+      }
+    }
+
+    /* Footer Styles */
+    footer {
+      background: white; /* White background color */
+      padding: 20px;
+      color: #333; /* Dark text color */
+      text-align: center;
+      width: 100%;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+    }
+
+    footer img {
+      width: 30px;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Progress Bar Container -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div>
+      <img src="Abhyaz.logo.jpg" alt="Logo" >
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="form1.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <section class="container">
+    <header>Intern Form</header>
+    <form method="post" action="connect.php" id="internForm" class="form">
+      <div class="form-group input-box">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="tenure">Tenure:</label>
+        <select id="tenure" name="tenure" required>
+          <option value="1">1 month</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months</option>
+          <option value="4">4 months</option>
+          <option value="5">5 months</option>
+          <option value="6">6 months</option>
+        </select>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="exitDate">Tentative Exit Date:</label>
+        <input type="date" id="exitDate" name="exitDate" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="jobRole">Job Role:</label>
+        <input type="text" id="jobRole" name="jobRole" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="otherRole">Interested in any other job role:</label>
+        <input type="text" id="otherRole" name="otherRole">
+      </div>
+
+      <div class="form-group">
+        <label for="tasksAssigned">Task Assigned:</label>
+        <textarea id="tasksAssigned" name="tasksAssigned" rows="4" class="input-box" required></textarea>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="familiarTools">Familiar Tools:</label>
+        <input type="text" id="familiarTools" name="familiarTools" required>
+      </div>
+
+      <div class="form-group input-box">
+        <label for="taskStatus">Task Status:</label>
+        <select id="taskStatus" name="taskStatus" required>
+          <option value="inProgress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+
+      <div class="form-group input-box">
+        <label for="workDriveLink">Work Drive Link:</label>
+        <input type="url" id="workDriveLink" name="workDriveLink" required>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; Abhyaz 2024</p>
+    <!-- Add your social media logos here -->
+      <a href="https://www.linkedin.com/company/abhyazlearning/mycompany/" ><img src="Linkedin.png" alt="LinkedIn" ></a>
+      <a href="https://www.abhyaz.com/" ><img src="google.png" alt="Google" ></a>
+      <a href="https://www.facebook.com/abhyazlearning/" ><img src="Facebook.png" alt="Facebook" ></a>
+      <a href="https://www.instagram.com/abhyazlearning/?hl=en" ><img src="Instagram.png" alt="Instagram" ></a>
+  </footer>
+
+  <!-- Add Calendar JS link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.2/flatpickr.min.js"></script>
+  <script>
+    // Initialize Flatpickr for date inputs
+    flatpickr(".form input[type='date']", {
+      enableTime: false,
+      dateFormat: "Y-m-d",
+    });
+
+    // Add progress bar functionality
+    window.onscroll = function () {
+      updateProgressBar();
+    };
+
+    function updateProgressBar() {
+      const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+      const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercentage = (scrollPos / documentHeight) * 100;
+      document.getElementById("progress-bar").style.width = scrollPercentage + "%";
+    }
+  </script>
+</body>
+</html>
